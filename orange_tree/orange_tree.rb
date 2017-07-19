@@ -29,6 +29,7 @@ class OrangeTree
     @height = height
     @age = age
     @orangeCount = orangeCount
+    puts "A new Orange Tree has been born."
   end
   
   def height
@@ -36,14 +37,18 @@ class OrangeTree
   end
   
   def oneYearPasses
+    puts "One year passes..."
     @age += 1
     @height += 10
     @orangeCount = 0
-    case @age
-      when @age < 2 then @orangeCount += 0
-      when @age > 2 && @age < 4 then @orangeCount += 5
-      when @age > 4 && @age < 6 then @orangeCount += 8
-      when @age > 6 then puts("Your tree is dead. Sorry!")
+
+    if @age > 2
+    	@orangeCount = @age * 5
+    elsif @age > 6
+    	puts "Your tree is dead. Sorry!"
+    	
+    else
+    	@orangeCount = 0
     end
   end
   
@@ -55,16 +60,16 @@ class OrangeTree
     puts "How many oranges would you like to pick?"
     amount = gets.chomp!.to_i
     
-    if amount == 1 && amount < @orangeCount
+    if amount == 1 && amount <= @orangeCount
       puts "You picked an orange and it tasted like heaven!"
       @orangeCount -= amount
-      puts "Your tree has {@orangeCount} oranges left."
-    elsif amount > 1 && amount < @orangeCount
+      puts "Your tree has #{@orangeCount} oranges left."
+    elsif amount > 1 && amount <= @orangeCount
       puts "You picked #{amount} oranges and they tasted heavenly!"
       @orangeCount -= amount
-      puts "Your tree has {@orangeCount} oranges left."
-    else
-      puts "Your tree doesn't yet have any oranges :-("
+      puts "Your tree has #{@orangeCount} oranges left."
+    elsif amount > @orangeCount
+      puts "Your orange tree doesn't have that many oranges :-("
     end
   end
 end
